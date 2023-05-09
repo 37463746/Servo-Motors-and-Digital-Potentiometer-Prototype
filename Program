@@ -1,0 +1,68 @@
+//Libraries 
+#include <DigiPotX9Cxxx.h>
+#include <Servo.h>
+
+//Variables
+Servo myservo1;
+Servo myservo2;
+DigiPot pot1(2,3,4);
+DigiPot pot2(5,6,7);
+const int analogInputPin1 = A0;
+const int analogInputPin2 = A1;
+
+void setup(){
+  Serial.begin(9600);
+  myservo1.attach(9);
+  myservo2.attach(10);
+  myservo1.write(90);
+  myservo2.write(90);
+}
+
+void loop(){
+  if (Serial.available() > 0){ 
+    int servoCommand1 = Serial.parseInt();
+    switch (servoCommand1){
+      case 1: //command to increase servo motor angle 
+        pot1.increase(20);
+        break;
+      case 2: //command to decrease servo motor angle 
+        pot1.decrease(20);
+        break;
+      default:
+        break;
+    }
+    delay(100);
+    int analogValue1 = analogRead(analogInputPin1); //map the command for the serial port to the potentiometer
+    int mappedValue1 = map(analogValue1, 0, 1023, 0, 180);
+    if (mappedValue1 < 0){
+      mappedValue1 = 0;
+      }
+    else if (mappedValue1 > 180){
+      mappedValue1 = 180;
+      }
+    myservo1.write(mappedValue1); //adjust servos position to the potentiometers resistance 
+  }
+
+  if (Serial.available() > 0){
+    int servoCommand2 = Serial.parseInt();
+    switch (servoCommand2){
+      case 3: //command to increase servo motor angle 
+        pot2.increase(10);
+        break;
+      case 4: //command to decrease servo motor angle 
+        pot2.decrease(10);
+        break;
+      default:
+        break;
+    }
+    delay(100);
+    int analogValue2 = analogRead(analogInputPin2); //map the command for the serial port to the potentiometer
+    int mappedValue2 = map(analogValue2, 0, 1023, 0, 180); 
+    if (mappedValue2 < 0){
+      mappedValue2 = 0;
+      }
+    else if (mappedValue2 > 180){
+      mappedValue2 = 180;
+      }
+    myservo2.write(mappedValue2); //adjust servos position to the potentiometers resistance 
+}}
