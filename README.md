@@ -1,7 +1,5 @@
 # Servo-Motors-and-Digital-Potentiometer-Prototype
 
-Important: The diagram of the prototype can be found under the tab labelled "Wiki" within this repository
-
 Notes: 
 
   -This code aims to test both the two servo motors being used and the two digital potentiometers being used
