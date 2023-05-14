@@ -9,3 +9,5 @@ Notes:
   -In the final product a remote control will be used instead of the serial terminal
   
   -Also note that in the final product the servo motors will change position based on changes in volume and freqeuncy
+  
+  -Digital potentiometer code adapated from: https://electropeak.com/learn/interfacing-x9c103s-10k-digital-potentiometer-module-with-arduino/ 
